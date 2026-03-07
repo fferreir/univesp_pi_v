@@ -80,7 +80,7 @@ void build_ui() {
   lv_label_set_text(label_hum, "--.- %");
   lv_obj_align(label_hum, LV_ALIGN_RIGHT_MID, -60, 30);
 
-  // --- NOVO: Etiqueta de Alerta (Escondida no início) ---
+  // --- Etiqueta de Alerta (Escondida no início) ---
   label_alert = lv_label_create(lv_screen_active());
   lv_label_set_text(label_alert, LV_SYMBOL_WARNING " SENSOR OFFLINE"); // Símbolo de perigo + texto
   lv_obj_set_style_text_color(label_alert, lv_color_hex(0xFF0000), 0); // Fica Vermelho
@@ -155,7 +155,7 @@ void loop() {
     bool sensorOnline = sht4.getEvent(&humidity, &temp);
 
     if (sensorOnline) {
-      // 1. O SENSOR ESTÁ A FUNCIONAR BEM
+      // 1. O SENSOR FUNCIONANDO BEM
       lv_obj_add_flag(label_alert, LV_OBJ_FLAG_HIDDEN); // Esconde o aviso vermelho
 
       String textoTemp = String(temp.temperature, 1) + " °C";
@@ -167,9 +167,9 @@ void loop() {
       lv_label_set_text(label_hum, textoHum.c_str());
 
     } else {
-      // 2. O CABO DESLIGOU-SE OU HOUVE ERRO!
+      // 2. O CABO DESCONECTOU-SE OU HOUVE ERRO!
       
-      // Acorda o ecrã sozinho para avisar!
+      // Acorda o monitor sozinho para avisar!
       if (!isScreenOn) {
         digitalWrite(TFT_BL, HIGH);
         isScreenOn = true;
@@ -179,7 +179,7 @@ void loop() {
       // Mostra o texto vermelho
       lv_obj_remove_flag(label_alert, LV_OBJ_FLAG_HIDDEN); 
 
-      // Coloca os gráficos a zero e o texto a piscar traços
+      // Coloca os gráficos em zero e o texto piscando com traços
       lv_label_set_text(label_temp, "--.- °C");
       lv_label_set_text(label_hum, "--.- %");
       lv_arc_set_value(arc_temp, 0);
