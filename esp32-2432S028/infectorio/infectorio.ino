@@ -38,10 +38,10 @@ lv_obj_t * label_alert;
 
 // Controle de Tempo
 unsigned long lastReadTime = 0;
-const unsigned long readInterval = 60000; // Enviar a cada 1 minuto
+const unsigned long readInterval = 900000; // Enviar a cada 15 minutos
 uint32_t lastTick = 0;
 unsigned long lastTouchTime = 0;
-const unsigned long screenTimeout = 15000; // 15 segundos
+const unsigned long screenTimeout = 30000; // 30 segundos
 bool isScreenOn = true;
 
 // --- 3. Funções de Conectividade ---
